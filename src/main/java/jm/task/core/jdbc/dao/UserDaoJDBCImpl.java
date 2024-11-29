@@ -5,10 +5,7 @@ import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static com.mysql.cj.MysqlType.TINYINT;
 
 public class UserDaoJDBCImpl  implements UserDao {
     Connection connection = Util.getDBConnection();
