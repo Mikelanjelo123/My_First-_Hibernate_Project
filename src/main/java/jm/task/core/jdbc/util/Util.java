@@ -1,7 +1,8 @@
 package jm.task.core.jdbc.util;
 
-import com.mysql.cj.Session;
+
 import jm.task.core.jdbc.model.User;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,7 +29,7 @@ public class Util {
 
 
     public static SessionFactory getSessionFactory() {
-        SessionFactory sessionFactory = null;
+        SessionFactory sessionFactory;
         try {
             Configuration configuration = new Configuration()
                     .setProperty("hibernate.connection.driver_class", DB_DRIVER)
@@ -44,8 +45,7 @@ public class Util {
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
             System.out.println("Connected to database");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HibernateException e) {
             throw new RuntimeException("Failed to create session factory", e);
         }
         return sessionFactory;

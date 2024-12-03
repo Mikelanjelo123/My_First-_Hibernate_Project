@@ -24,7 +24,7 @@ public class UserDaoJDBCImpl  implements UserDao {
                 """;
         try (Statement statement = connection.createStatement()) {
             statement.execute(createUsersTableSQL);
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
         }
     }
@@ -32,7 +32,7 @@ public class UserDaoJDBCImpl  implements UserDao {
     public void dropUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.execute("DROP TABLE IF EXISTS users");
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
         }
     }
@@ -44,7 +44,7 @@ public class UserDaoJDBCImpl  implements UserDao {
             statement.setString(2, lastName);
             statement.setByte(3, age);
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
     }
 
@@ -53,7 +53,7 @@ public class UserDaoJDBCImpl  implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(deleteUserSQL)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
         }
     }
@@ -64,13 +64,12 @@ public class UserDaoJDBCImpl  implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(selectAllUsersSQL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 String lastName = resultSet.getString("lastName");
                 byte age = resultSet.getByte("age");
                 users.add(new User(name, lastName, age));
             }
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
         }
         return users;
@@ -80,8 +79,7 @@ public class UserDaoJDBCImpl  implements UserDao {
         String truncateUsersTableSQL = "TRUNCATE TABLE users";
         try (PreparedStatement statement = connection.prepareStatement(truncateUsersTableSQL)) {
             statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ignored) {
         }
     }
 }
