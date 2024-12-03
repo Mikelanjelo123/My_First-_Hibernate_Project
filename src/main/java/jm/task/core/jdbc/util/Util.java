@@ -1,6 +1,5 @@
 package jm.task.core.jdbc.util;
 
-
 import jm.task.core.jdbc.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -37,14 +36,12 @@ public class Util {
                     .setProperty("hibernate.connection.username", DB_USER)
                     .setProperty("hibernate.connection.password", DB_PASSWORD)
                     .setProperty("hibernate.hbm2ddl.auto", "update")
-                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect")
                     .setProperty("hibernate.show_sql", "false")
                     .addAnnotatedClass(User.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-            System.out.println("Connected to database");
         } catch (HibernateException e) {
             throw new RuntimeException("Failed to create session factory", e);
         }
