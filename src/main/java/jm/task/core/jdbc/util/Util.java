@@ -35,7 +35,6 @@ public class Util {
                     .setProperty("hibernate.connection.url", DB_CONNECTION)
                     .setProperty("hibernate.connection.username", DB_USER)
                     .setProperty("hibernate.connection.password", DB_PASSWORD)
-                    .setProperty("hibernate.hbm2ddl.auto", "update")
                     .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect")
                     .setProperty("hibernate.show_sql", "false")
                     .addAnnotatedClass(User.class);
